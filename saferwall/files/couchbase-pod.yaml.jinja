@@ -1,0 +1,54 @@
+{% set couchbase_version = salt['pillar.get']('saferwall:service:couchbase:version') -%}
+{% set couchbase_rest_port_container = salt['pillar.get']('saferwall:service:couchbase:port:rest_port:container') -%}
+{% set couchbase_rest_port_host = salt['pillar.get']('saferwall:service:couchbase:port:rest_port:host') -%}
+{% set couchbase_capi_port_container = salt['pillar.get']('saferwall:service:couchbase:port:capi_port:container') -%}
+{% set couchbase_capi_port_host = salt['pillar.get']('saferwall:service:couchbase:port:capi_port:host') -%}
+{% set couchbase_query_port_container = salt['pillar.get']('saferwall:service:couchbase:port:query_port:container') -%}
+{% set couchbase_query_port_host = salt['pillar.get']('saferwall:service:couchbase:port:query_port:host') -%}
+{% set couchbase_fts_http_port_container = salt['pillar.get']('saferwall:service:couchbase:port:fts_http_port:container') -%}
+{% set couchbase_fts_http_port_host = salt['pillar.get']('saferwall:service:couchbase:port:fts_http_port:host') -%}
+{% set couchbase_cbas_http_port_container = salt['pillar.get']('saferwall:service:couchbase:port:cbas_http_port:container') -%}
+{% set couchbase_cbas_http_port_host = salt['pillar.get']('saferwall:service:couchbase:port:cbas_http_port:host') -%}
+{% set couchbase_eventing_http_port_container = salt['pillar.get']('saferwall:service:couchbase:port:eventing_http_port:container') -%}
+{% set couchbase_eventing_http_port_host = salt['pillar.get']('saferwall:service:couchbase:port:eventing_http_port:host') -%}
+{% set couchbase_memcached_http_port_container = salt['pillar.get']('saferwall:service:couchbase:port:memcached_http_port:container') -%}
+{% set couchbase_memcached_http_port_host = salt['pillar.get']('saferwall:service:couchbase:port:memcached_http_port:host') -%}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: couchbase-pod
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: couchbase
+    image: docker.io/library/couchbase:{{ couchbase_version }}
+    ports:
+    - containerPort: {{ couchbase_rest_port_container }}
+      hostPort: {{ couchbase_rest_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_capi_port_container }}
+      hostPort: {{ couchbase_capi_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_query_port_container }}
+      hostPort: {{ couchbase_query_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_fts_http_port_container }}
+      hostPort: {{ couchbase_fts_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_cbas_http_port_container }}
+      hostPort: {{ couchbase_cbas_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_eventing_http_port_container }}
+      hostPort: {{ couchbase_eventing_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ couchbase_memcached_http_port_container }}
+      hostPort: {{ couchbase_memcached_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp

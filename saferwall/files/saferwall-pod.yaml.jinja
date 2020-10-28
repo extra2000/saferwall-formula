@@ -1,0 +1,57 @@
+{% set ui_port_container = salt['pillar.get']('saferwall:service:ui:port:container') -%}
+{% set ui_port_host = salt['pillar.get']('saferwall:service:ui:port:host') -%}
+{% set backend_port_container = salt['pillar.get']('saferwall:service:backend:port:container') -%}
+{% set backend_port_host = salt['pillar.get']('saferwall:service:backend:port:host') -%}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: saferwall-pod
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: backend
+    image: localhost/saferwall/backend
+    imagePullPolicy: Never
+    workingDir: /backend
+    ports:
+    - containerPort: {{ backend_port_container }}
+      hostPort: {{ backend_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: ENVIRONMENT
+      value: "prod"
+    volumeMounts:
+    - mountPath: /backend/config/app.prod.toml:ro,z
+      name: backend-conf
+  - name: ui
+    image: localhost/saferwall/ui
+    imagePullPolicy: Never
+    ports:
+    - containerPort: {{ ui_port_container }}
+      hostPort: {{ ui_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+  - name: consumer
+    image: localhost/saferwall/consumer
+    imagePullPolicy: Never
+    workingDir: /consumer
+    env:
+    - name: ENVIRONMENT
+      value: "prod"
+    volumeMounts:
+    - mountPath: /consumer/configs/saferwall.prod.toml:ro,z
+      name: consumer-conf
+    - mountPath: /samples:rw,z
+      name: samples
+  volumes:
+  - name: backend-conf
+    hostPath:
+      path: ./backend-conf.toml
+  - name: consumer-conf
+    hostPath:
+      path: ./consumer-conf.toml
+  - name: samples
+    hostPath:
+      path: ./samples

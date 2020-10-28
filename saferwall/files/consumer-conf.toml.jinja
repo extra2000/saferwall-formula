@@ -1,0 +1,89 @@
+{% set backend_port = salt['pillar.get']('saferwall:service:backend:port:host') -%}
+{% set backend_admin_user = salt['pillar.get']('saferwall:service:backend:admin:user') -%}
+{% set backend_admin_password = salt['pillar.get']('saferwall:service:backend:admin:password') -%}
+{% set nsqlookup_http_port = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:http:host') -%}
+{% set nsq_tcp_port = salt['pillar.get']('saferwall:service:nsq:port:tcp:host') -%}
+{% set minio_port = salt['pillar.get']('saferwall:service:minio:port:host') -%}
+{% set minio_accesskey = salt['pillar.get']('saferwall:service:minio:accesskey') -%}
+{% set minio_secret_key = salt['pillar.get']('saferwall:service:minio:seckey') -%}
+{% set multiav_clamav_enabled = salt['pillar.get']('saferwall:service:multiav:clamav:enabled')|string|lower -%}
+{% set multiav_clamav_port = salt['pillar.get']('saferwall:service:multiav:clamav:port:host') -%}
+{% set multiav_comodo_enabled = salt['pillar.get']('saferwall:service:multiav:comodo:enabled')|string|lower -%}
+{% set multiav_comodo_port = salt['pillar.get']('saferwall:service:multiav:comodo:port:host') -%}
+{% set multiav_sophos_enabled = salt['pillar.get']('saferwall:service:multiav:sophos:enabled')|string|lower -%}
+{% set multiav_sophos_port = salt['pillar.get']('saferwall:service:multiav:sophos:port:host') -%}
+{% set multiav_windefender_enabled = salt['pillar.get']('saferwall:service:multiav:windefender:enabled')|string|lower -%}
+{% set multiav_windefender_port = salt['pillar.get']('saferwall:service:multiav:windefender:port:host') -%}
+
+[backend]
+address = 'http://localhost:{{ backend_port }}'
+admin_user = "{{ backend_admin_user }}"
+admin_pwd = "{{ backend_admin_password }}"
+
+[nsq]
+lookupd = ["10.77.1.1:{{ nsqlookup_http_port }}"]
+address = '10.77.1.1:{{ nsq_tcp_port }}'
+
+[minio]
+endpoint = '10.77.1.1:{{ minio_port }}'
+accesskey = '{{ minio_accesskey }}'
+seckey = '{{ minio_secret_key }}'
+spacename = 'samples'
+ssl = false
+
+[multiav]
+  [multiav.avast]
+  enabled = false
+  addr = "10.77.1.1:10001"
+
+  [multiav.avira]
+  enabled = false
+  addr = "10.77.1.1:10002"
+
+  [multiav.bitdefender]
+  enabled = false
+  addr = "10.77.1.1:10003"
+
+  [multiav.clamav]
+  enabled = {{ multiav_clamav_enabled }}
+  addr = "10.77.1.1:{{ multiav_clamav_port }}"
+
+  [multiav.comodo]
+  enabled = {{ multiav_comodo_enabled }}
+  addr = "10.77.1.1:{{ multiav_comodo_port }}"
+
+  [multiav.drweb]
+  enabled = false
+  addr = "10.77.1.1:10006"
+
+  [multiav.eset]
+  enabled = false
+  addr = "10.77.1.1:10007"
+
+  [multiav.fsecure]
+  enabled = false
+  addr = "10.77.1.1:10008"
+
+  [multiav.kaspersky]
+  enabled = false
+  addr = "10.77.1.1:10009"
+
+  [multiav.symantec]
+  enabled = false
+  addr = "10.77.1.1:10010"
+
+  [multiav.sophos]
+  enabled = {{ multiav_sophos_enabled }}
+  addr = "10.77.1.1:{{ multiav_sophos_port }}"
+
+  [multiav.mcafee]
+  enabled = false
+  addr = "10.77.1.1:10012"
+
+  [multiav.trendmicro]
+  enabled = false
+  addr = "10.77.1.1:10013"
+
+  [multiav.windefender]
+  enabled = {{ multiav_windefender_enabled }}
+  addr = "10.77.1.1:{{ multiav_windefender_port }}"
