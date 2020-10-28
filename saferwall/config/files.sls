@@ -61,3 +61,12 @@
     - user: {{ host_user }}
     - group: {{ host_group }}
     - template: jinja
+
+dos2unix:
+  pkg.installed
+
+ensure-bash-scripts-are-LF:
+  cmd.run:
+    - name: find ./ -type f -print0 | xargs -0 dos2unix
+    - cwd: /opt/saferwall
+    - runas: {{ host_user }}
