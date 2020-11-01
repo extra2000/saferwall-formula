@@ -35,6 +35,13 @@
     - group: {{ host_group }}
     - template: jinja
 
+/opt/saferwall/clamd.conf:
+  file.managed:
+    - source: salt://saferwall/files/clamd.conf.jinja
+    - user: {{ host_user }}
+    - group: {{ host_group }}
+    - template: jinja
+
 /opt/saferwall/nsq-pod.yaml:
   file.managed:
     - source: salt://saferwall/files/nsq-pod.yaml.jinja

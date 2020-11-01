@@ -23,7 +23,7 @@ multiav-clamav-go-present:
 
 multiav-clamav-running:
   cmd.run:
-    - name: podman run -it -d --pod multiav-pod -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-clamav --volume /opt/saferwall/samples:/samples:rw,z localhost/saferwall/goclamav:{{ saferwall_version }}
+    - name: podman run -it -d --pod multiav-pod -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-clamav --volume /opt/saferwall/samples:/samples:rw,z --volume /opt/saferwall/clamd.conf:/etc/clamav/clamd.conf:ro,z localhost/saferwall/goclamav:{{ saferwall_version }}
     - cwd: /opt/saferwall/src
     - runas: {{ host_user }}
     - require:
