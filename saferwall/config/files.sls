@@ -14,6 +14,7 @@
     - source: salt://saferwall/files/saferwall
     - user: {{ host_user }}
     - group: {{ host_group }}
+    - show_changes: false
 
 /opt/saferwall/samples:
   file.directory:
@@ -70,3 +71,4 @@ ensure-bash-scripts-are-LF:
     - name: find ./ -type f -print0 | xargs -0 dos2unix
     - cwd: /opt/saferwall
     - runas: {{ host_user }}
+    - show_changes: false
