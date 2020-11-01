@@ -3,7 +3,6 @@
 
 {% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
 {% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
-{% set listen_port = salt['pillar.get']('saferwall:service:multiav:comodo:port:container') -%}
 
 {% if salt['pillar.get']('saferwall:service:multiav:comodo:enabled') %}
 
@@ -20,13 +19,5 @@ multiav-comodo-go-present:
     - runas: {{ host_user }}
     - require:
       - cmd: multiav-comodo-present
-
-multiav-comodo-running:
-  cmd.run:
-    - name: podman run -it -d --pod multiav-pod -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-comodo --volume /opt/saferwall/samples:/samples:rw,z localhost/saferwall/gocomodo:{{ saferwall_version }}
-    - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
-    - require:
-      - cmd: multiav-comodo-go-present
 
 {% endif %}

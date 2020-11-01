@@ -3,7 +3,6 @@
 
 {% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
 {% set version = salt['pillar.get']('saferwall:service:multiav:windefender:version') -%}
-{% set listen_port = salt['pillar.get']('saferwall:service:multiav:windefender:port:container') -%}
 
 {% if salt['pillar.get']('saferwall:service:multiav:windefender:enabled') %}
 
@@ -20,13 +19,5 @@ multiav-windefender-go-present:
     - runas: {{ host_user }}
     - require:
       - cmd: multiav-windefender-present
-
-multiav-windefender-running:
-  cmd.run:
-    - name: podman run -it -d --pod multiav-pod --security-opt seccomp=./build/data/seccomp.json -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-windefender --volume /opt/saferwall/samples:/samples:rw,z localhost/saferwall/gowindefender:{{ version }}
-    - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
-    - require:
-      - cmd: multiav-windefender-go-present
 
 {% endif %}

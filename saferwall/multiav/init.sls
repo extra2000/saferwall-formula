@@ -2,7 +2,6 @@
 # vim: ft=sls
 
 include:
-  - .pod-present
   # free antivirus
   - .clamav
   - .comodo

@@ -3,7 +3,6 @@
 
 {% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
 {% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
-{% set listen_port = salt['pillar.get']('saferwall:service:multiav:clamav:port:container') -%}
 
 {% if salt['pillar.get']('saferwall:service:multiav:clamav:enabled') %}
 
@@ -20,13 +19,5 @@ multiav-clamav-go-present:
     - runas: {{ host_user }}
     - require:
       - cmd: multiav-clamav-present
-
-multiav-clamav-running:
-  cmd.run:
-    - name: podman run -it -d --pod multiav-pod -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-clamav --volume /opt/saferwall/samples:/samples:rw,z --volume /opt/saferwall/clamd.conf:/etc/clamav/clamd.conf:ro,z localhost/saferwall/goclamav:{{ saferwall_version }}
-    - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
-    - require:
-      - cmd: multiav-clamav-go-present
 
 {% endif %}

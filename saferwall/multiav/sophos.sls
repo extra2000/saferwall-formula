@@ -3,7 +3,6 @@
 
 {% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
 {% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
-{% set listen_port = salt['pillar.get']('saferwall:service:multiav:sophos:port:container') -%}
 {% set url = salt['pillar.get']('saferwall:service:multiav:sophos:url') -%}
 
 {% if salt['pillar.get']('saferwall:service:multiav:sophos:enabled') %}
@@ -21,13 +20,5 @@ multiav-sophos-go-present:
     - runas: {{ host_user }}
     - require:
       - cmd: multiav-sophos-present
-
-multiav-sophos-running:
-  cmd.run:
-    - name: podman run -it -d --pod multiav-pod -e "LISTEN_PORT={{ listen_port }}" --name multiav-pod-sophos --volume /opt/saferwall/samples:/samples:rw,z localhost/saferwall/gosophos:{{ saferwall_version }}
-    - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
-    - require:
-      - cmd: multiav-sophos-go-present
 
 {% endif %}

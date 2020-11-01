@@ -63,6 +63,13 @@
     - group: {{ host_group }}
     - template: jinja
 
+/opt/saferwall/multiav-pod.yaml:
+  file.managed:
+    - source: salt://saferwall/files/multiav-pod.yaml.jinja
+    - user: {{ host_user }}
+    - group: {{ host_group }}
+    - template: jinja
+
 /opt/saferwall/saferwall-pod.yaml:
   file.managed:
     - source: salt://saferwall/files/saferwall-pod.yaml.jinja

@@ -3,4 +3,5 @@
 
 include:
   - .config
+  - .multiav
   - .package
