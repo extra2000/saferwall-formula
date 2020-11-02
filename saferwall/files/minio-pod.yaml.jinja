@@ -24,3 +24,10 @@ spec:
       value: {{ minio_accesskey }}
     - name: MINIO_SECRET_KEY
       value: {{ minio_secret_key }}
+    volumeMounts:
+    - mountPath: /data:rw,z
+      name: data
+  volumes:
+  - name: data
+    hostPath:
+      path: ./minio
