@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.0-alpha.2](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-11-02)
+
+
+### Features
+
+* **couchbase-pod:** Add persistent volume ([56abb37](https://github.com/extra2000/saferwall-formula/commit/56abb3704f795f25908d5ee4ef4ceb9c866772e0))
+* **minio-pod:** Add persistent volume ([15e3dea](https://github.com/extra2000/saferwall-formula/commit/15e3dea569c2228be5921bb8e0c29e17b50ecca9))
+* **nsq-pod:** Add persistent volume ([d00bf30](https://github.com/extra2000/saferwall-formula/commit/d00bf302ea68d37c8a39b9d1dd6ba10eae9bbf31))
+* **saferwall:** Rebase on top of latest upstream `master` ([a9f071a](https://github.com/extra2000/saferwall-formula/commit/a9f071a569557854f4e06e7abafb2eb02f2336a6))
+
+
+### Code Refactoring
+
+* ***-pod:** Change volume path from relative to absolute path ([7923775](https://github.com/extra2000/saferwall-formula/commit/7923775a2e99727d38f595f8490a0f93ebfd55e8))
+
+
+### Fixes
+
+* **config.file:** Make `dos2unix` convert files in `/opt/saferwall/src/` only because `/opt/saferwall/` now contains container volumes ([8d431b8](https://github.com/extra2000/saferwall-formula/commit/8d431b864b01f1c5f44e8cb56e411fc7deaaf5d9))
+
 ## 1.0.0-alpha.1 (2020-11-01)
 
 
