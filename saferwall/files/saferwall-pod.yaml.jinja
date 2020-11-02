@@ -48,10 +48,10 @@ spec:
   volumes:
   - name: backend-conf
     hostPath:
-      path: ./backend-conf.toml
+      path: /opt/saferwall/backend-conf.toml
   - name: consumer-conf
     hostPath:
-      path: ./consumer-conf.toml
+      path: /opt/saferwall/consumer-conf.toml
   - name: samples
     hostPath:
-      path: ./samples
+      path: /opt/saferwall/samples
