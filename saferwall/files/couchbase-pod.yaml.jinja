@@ -52,3 +52,10 @@ spec:
       hostPort: {{ couchbase_memcached_http_port_host }}
       hostIP: 0.0.0.0
       protocol: tcp
+    volumeMounts:
+    - mountPath: /opt/couchbase/var:rw,z
+      name: data
+  volumes:
+  - name: data
+    hostPath:
+      path: ./couchbase
