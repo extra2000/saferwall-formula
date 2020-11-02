@@ -83,6 +83,6 @@ dos2unix:
 ensure-bash-scripts-are-LF:
   cmd.run:
     - name: find ./ -type f -print0 | xargs -0 dos2unix
-    - cwd: /opt/saferwall
+    - cwd: /opt/saferwall/src
     - runas: {{ host_user }}
     - show_changes: false
