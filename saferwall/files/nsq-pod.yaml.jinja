@@ -33,7 +33,7 @@ spec:
       protocol: tcp
   - name: nsq
     image: docker.io/nsqio/nsq:{{ nsq_version }}
-    command: ['/nsqd', '--broadcast-address=10.77.1.1', '--lookupd-tcp-address=10.77.1.1:{{ nsqlookup_tcp_port_container }}']
+    command: ['/nsqd', '--data-path=/data', '--broadcast-address=10.77.1.1', '--lookupd-tcp-address=10.77.1.1:{{ nsqlookup_tcp_port_container }}']
     ports:
     - containerPort: {{ nsq_tcp_port_container }}
       hostPort: {{ nsq_tcp_port_host }}
@@ -47,6 +47,9 @@ spec:
       hostPort: {{ nsq_https_port_host }}
       hostIP: 0.0.0.0
       protocol: tcp
+    volumeMounts:
+    - mountPath: /data:rw,z
+      name: data
   - name: nsqadmin
     image: docker.io/nsqio/nsq:{{ nsq_version }}
     command: ['/nsqadmin', '--lookupd-http-address=localhost:{{ nsqlookup_http_port_container }}']
@@ -55,3 +58,7 @@ spec:
       hostPort: {{ nsqadmin_port_host }}
       hostIP: 0.0.0.0
       protocol: tcp
+  volumes:
+  - name: data
+    hostPath:
+      path: ./nsq
