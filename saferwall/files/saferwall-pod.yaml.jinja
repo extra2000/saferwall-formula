@@ -12,7 +12,6 @@ spec:
   containers:
   - name: backend
     image: localhost/saferwall/backend
-    imagePullPolicy: Never
     workingDir: /backend
     ports:
     - containerPort: {{ backend_port_container }}
@@ -27,7 +26,6 @@ spec:
       name: backend-conf
   - name: ui
     image: localhost/saferwall/ui
-    imagePullPolicy: Never
     ports:
     - containerPort: {{ ui_port_container }}
       hostPort: {{ ui_port_host }}
@@ -35,7 +33,6 @@ spec:
       protocol: tcp
   - name: consumer
     image: localhost/saferwall/consumer
-    imagePullPolicy: Never
     workingDir: /consumer
     env:
     - name: ENVIRONMENT
