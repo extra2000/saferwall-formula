@@ -52,7 +52,7 @@ spec:
       name: data
   - name: nsqadmin
     image: docker.io/nsqio/nsq:{{ nsq_version }}
-    command: ['/nsqadmin', '--lookupd-http-address=localhost:{{ nsqlookup_http_port_container }}']
+    command: ['/nsqadmin', '--lookupd-http-address=127.0.0.1:{{ nsqlookup_http_port_container }}']
     ports:
     - containerPort: {{ nsqadmin_port_container }}
       hostPort: {{ nsqadmin_port_host }}

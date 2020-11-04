@@ -16,7 +16,7 @@
 {% set multiav_windefender_port = salt['pillar.get']('saferwall:service:multiav:windefender:port:host') -%}
 
 [backend]
-address = 'http://localhost:{{ backend_port }}'
+address = 'http://127.0.0.1:{{ backend_port }}'
 admin_user = "{{ backend_admin_user }}"
 admin_pwd = "{{ backend_admin_password }}"
 
