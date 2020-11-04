@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-alpha.3](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-11-04)
+
+
+### Features
+
+* Add persistent volumes ([b8f5c1f](https://github.com/extra2000/saferwall-formula/commit/b8f5c1f79308297c9d349affb9b931f4adac5c1c))
+
+
+### Fixes
+
+* Change `localhost` to `127.0.0.1` because Podman containers on Debian/Ubuntu failed to resolve `localhost` ([6c107be](https://github.com/extra2000/saferwall-formula/commit/6c107bef2d7c4ebdf9710358011dbf8c5ce0f95c))
+* **saferwall-pod:** Remove `imagePullPolicy: Never` because it is unsupported on Podman `v2.0.x` and earlier ([5257670](https://github.com/extra2000/saferwall-formula/commit/5257670885aa5315281e13fab3d0cab5ed558d13))
+
 ## [1.0.0-alpha.2](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-11-02)
 
 
