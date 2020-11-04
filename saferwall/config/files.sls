@@ -16,11 +16,6 @@
     - group: {{ host_group }}
     - show_changes: false
 
-/opt/saferwall/samples:
-  file.directory:
-    - user: {{ host_user }}
-    - group: {{ host_group }}
-
 /opt/saferwall/backend-conf.toml:
   file.managed:
     - source: salt://saferwall/files/backend-conf.toml.jinja
