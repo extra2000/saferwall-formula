@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-alpha.6](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-11-30)
+
+
+### Features
+
+* Add `saferwall.service` state ([3889c1b](https://github.com/extra2000/saferwall-formula/commit/3889c1bc01f0cb04e09840697f5f0c77b7e1a70b))
+
+
+### Documentations
+
+* **README:** Add `saferwall.service` state ([c139992](https://github.com/extra2000/saferwall-formula/commit/c1399922a43d23cad304679c19e068ec1a4af93a))
+
 ## [1.0.0-alpha.5](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-11-30)
 
 
