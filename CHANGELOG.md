@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0-alpha.5](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-11-30)
+
+
+### Code Refactoring
+
+* Move building image states into `saferwall/build/` directory ([a60ffe9](https://github.com/extra2000/saferwall-formula/commit/a60ffe932a496ca4a5005c4017199aad0e083725))
+
+
+### Styles
+
+* **README:** Add a spacing after title ([f9a2942](https://github.com/extra2000/saferwall-formula/commit/f9a294283df1b21d8f6235add6717fbd1d7d929e))
+
+
+### Documentations
+
+* **README:** Add a list of available states ([fdd3ef5](https://github.com/extra2000/saferwall-formula/commit/fdd3ef5e182b75cc56d502afd4ac5a0de1944154))
+* **README:** Update description ([53a7972](https://github.com/extra2000/saferwall-formula/commit/53a7972558b209aa576413ec7271be75608e348e))
+
 ## [1.0.0-alpha.4](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-11-30)
 
 
