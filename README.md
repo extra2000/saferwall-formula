@@ -14,3 +14,4 @@ SaltStack Formula for [Saferwall](https://github.com/saferwall/saferwall).
 | `saferwall.build` | Build MultiAV and Saferwall images |
 | `saferwall.build.multiav` | Build MultiAV images |
 | `saferwall.build.saferwall` | Build Saferwall images |
+| `saferwall.service` | Start all services including Saferwall |
