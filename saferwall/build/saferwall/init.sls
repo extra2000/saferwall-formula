@@ -2,5 +2,6 @@
 # vim: ft=sls
 
 include:
-  - .config
-  - .build
+  - .backend
+  - .frontend
+  - .consumer
