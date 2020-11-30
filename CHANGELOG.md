@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.0-alpha.4](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-11-30)
+
+
+### Continuous Integrations
+
+* Add AppVeyor ([775b64b](https://github.com/extra2000/saferwall-formula/commit/775b64b3a6bdb97219f9246e2f94e41c1ac86950))
+* Remove Travis CI because it is no longer free ([80ec830](https://github.com/extra2000/saferwall-formula/commit/80ec83083cb1b5d5d079a18975faa2018b294337))
+* **semantic-release:** Write version to `VERSION.txt` file ([4e6c5e7](https://github.com/extra2000/saferwall-formula/commit/4e6c5e71cca41c616935f0f4e520414283029328))
+
 ## [1.0.0-alpha.3](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-11-04)
 
 
