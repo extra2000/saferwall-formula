@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-alpha.7](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-12-01)
+
+
+### Documentations
+
+* **README:** Add badges ([071c24a](https://github.com/extra2000/saferwall-formula/commit/071c24acc5b6970a6c812600fa91e39078015e7e))
+
 ## [1.0.0-alpha.6](https://github.com/extra2000/saferwall-formula/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-11-30)
 
 
