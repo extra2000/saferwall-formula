@@ -1,0 +1,54 @@
+{% set backend_admin_user = salt['pillar.get']('saferwall:service:backend:admin:user') -%}
+{% set backend_admin_password = salt['pillar.get']('saferwall:service:backend:admin:password') -%}
+{% set backend_admin_email = salt['pillar.get']('saferwall:service:backend:admin:email') -%}
+{% set backend_max_file_size = salt['pillar.get']('saferwall:service:backend:max_file_size') -%}
+{% set backend_max_avatar_file_size = salt['pillar.get']('saferwall:service:backend:max_avatar_file_size') -%}
+{% set backend_authkey = salt['pillar.get']('saferwall:service:backend:signkey') -%}
+{% set backend_port = salt['pillar.get']('saferwall:service:backend:port:host') -%}
+{% set ui_port = salt['pillar.get']('saferwall:service:ui:port:host') -%}
+{% set db_username = salt['pillar.get']('saferwall:service:couchbase:username') -%}
+{% set db_password = salt['pillar.get']('saferwall:service:couchbase:password') -%}
+{% set nsq_tcp_port = salt['pillar.get']('saferwall:service:nsq:port:tcp:host') -%}
+{% set minio_port = salt['pillar.get']('saferwall:service:minio:port:host') -%}
+{% set minio_accesskey = salt['pillar.get']('saferwall:service:minio:accesskey') -%}
+{% set minio_secret_key = salt['pillar.get']('saferwall:service:minio:seckey') -%}
+
+[ui]
+address = 'http://:{{ ui_port }}'
+
+[app]
+address = ":{{ backend_port }}"
+domain = "127.0.0.1"
+tmp_samples = "/tmp/samples"
+max_file_size = {{ backend_max_file_size }}
+max_avatar_file_size = {{ backend_max_avatar_file_size }}
+admin_user = "{{ backend_admin_user }}"
+admin_pwd = "{{ backend_admin_password }}"
+admin_email = "{{ backend_admin_email }}"
+
+[db]
+server = "couchbase://10.77.1.1"
+username = "{{ db_username }}"
+password = "{{ db_password }}"
+
+[nsq]
+address = '10.77.1.1:{{ nsq_tcp_port }}'
+
+[minio]
+endpoint = '10.77.1.1:{{ minio_port }}'
+accesskey = '{{ minio_accesskey }}'
+seckey = '{{ minio_secret_key }}'
+spacename = 'samples'
+avatarspace = 'images'
+ssl = false
+
+[auth]
+signkey = '{{ backend_authkey }}'
+
+[smtp]
+# server = "smtp.gmail.com"
+# port = 465
+# user =  "noreply@mysaferwall.com"
+# password = "password"
+# identity = "CompanyIdentify"
+# sender = "noreply@mysaferwall.com"

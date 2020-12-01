@@ -1,0 +1,85 @@
+{% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
+{% set windefender_version = salt['pillar.get']('saferwall:service:multiav:windefender:version') -%}
+{% set clamav_listen_port = salt['pillar.get']('saferwall:service:multiav:clamav:port:container') -%}
+{% set comodo_listen_port = salt['pillar.get']('saferwall:service:multiav:comodo:port:container') -%}
+{% set sophos_listen_port = salt['pillar.get']('saferwall:service:multiav:sophos:port:container') -%}
+{% set windefender_listen_port = salt['pillar.get']('saferwall:service:multiav:windefender:port:container') -%}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: localhost/seccomp.json
+  name: multiav-pod
+spec:
+  restartPolicy: OnFailure
+  containers:
+  {% if salt['pillar.get']('saferwall:service:multiav:clamav:enabled') -%}
+  - name: clamav
+    image: localhost/saferwall/goclamav:{{ saferwall_version }}
+    ports:
+    - containerPort: {{ clamav_listen_port }}
+      hostPort: {{ clamav_listen_port }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: LISTEN_PORT
+      value: {{ clamav_listen_port }}
+    volumeMounts:
+    - mountPath: /samples:rw,z
+      name: samples
+    - mountPath: /etc/clamav/clamd.conf:ro,z
+      name: clamav-conf
+  {% endif %}
+  {% if salt['pillar.get']('saferwall:service:multiav:comodo:enabled') -%}
+  - name: comodo
+    image: localhost/saferwall/gocomodo:{{ saferwall_version }}
+    ports:
+    - containerPort: {{ comodo_listen_port }}
+      hostPort: {{ comodo_listen_port }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: LISTEN_PORT
+      value: {{ comodo_listen_port }}
+    volumeMounts:
+    - mountPath: /samples:rw,z
+      name: samples
+  {% endif %}
+  {% if salt['pillar.get']('saferwall:service:multiav:sophos:enabled') -%}
+  - name: sophos
+    image: localhost/saferwall/gosophos:{{ saferwall_version }}
+    ports:
+    - containerPort: {{ sophos_listen_port }}
+      hostPort: {{ sophos_listen_port }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: LISTEN_PORT
+      value: {{ sophos_listen_port }}
+    volumeMounts:
+    - mountPath: /samples:rw,z
+      name: samples
+  {% endif %}
+  {% if salt['pillar.get']('saferwall:service:multiav:windefender:enabled') -%}
+  - name: windefender
+    image: localhost/saferwall/gowindefender:{{ windefender_version }}
+    ports:
+    - containerPort: {{ windefender_listen_port }}
+      hostPort: {{ windefender_listen_port }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: LISTEN_PORT
+      value: {{ windefender_listen_port }}
+    volumeMounts:
+    - mountPath: /samples:rw,z
+      name: samples
+  {% endif %}
+  volumes:
+  - name: samples
+    hostPath:
+      path: /opt/saferwall/samples
+  - name: clamav-conf
+    hostPath:
+      path: /opt/saferwall/clamd.conf

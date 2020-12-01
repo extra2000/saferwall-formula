@@ -1,0 +1,3 @@
+[submodule "saferwall/files/saferwall"]
+	path = saferwall/files/saferwall
+	url = https://github.com/extra2000/saferwall.git

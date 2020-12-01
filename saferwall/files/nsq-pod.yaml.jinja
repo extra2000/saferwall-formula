@@ -1,0 +1,64 @@
+{% set nsq_version = salt['pillar.get']('saferwall:service:nsq:version') -%}
+{% set nsqlookup_tcp_port_container = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:tcp:container') -%}
+{% set nsqlookup_tcp_port_host = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:tcp:host') -%}
+{% set nsqlookup_http_port_container = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:http:container') -%}
+{% set nsqlookup_http_port_host = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:http:host') -%}
+{% set nsq_tcp_port_container = salt['pillar.get']('saferwall:service:nsq:port:tcp:container') -%}
+{% set nsq_tcp_port_host = salt['pillar.get']('saferwall:service:nsq:port:tcp:host') -%}
+{% set nsq_http_port_container = salt['pillar.get']('saferwall:service:nsq:port:http:container') -%}
+{% set nsq_http_port_host = salt['pillar.get']('saferwall:service:nsq:port:http:host') -%}
+{% set nsq_https_port_container = salt['pillar.get']('saferwall:service:nsq:port:https:container') -%}
+{% set nsq_https_port_host = salt['pillar.get']('saferwall:service:nsq:port:https:host') -%}
+{% set nsqadmin_port_container = salt['pillar.get']('saferwall:service:nsq:nsqadmin:port:container') -%}
+{% set nsqadmin_port_host = salt['pillar.get']('saferwall:service:nsq:nsqadmin:port:host') -%}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nsq-pod
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: nsqlookup
+    image: docker.io/nsqio/nsq:{{ nsq_version }}
+    command: ['/nsqlookupd']
+    ports:
+    - containerPort: {{ nsqlookup_tcp_port_container }}
+      hostPort: {{ nsqlookup_tcp_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ nsqlookup_http_port_container }}
+      hostPort: {{ nsqlookup_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+  - name: nsq
+    image: docker.io/nsqio/nsq:{{ nsq_version }}
+    command: ['/nsqd', '--data-path=/data', '--broadcast-address=10.77.1.1', '--lookupd-tcp-address=10.77.1.1:{{ nsqlookup_tcp_port_container }}']
+    ports:
+    - containerPort: {{ nsq_tcp_port_container }}
+      hostPort: {{ nsq_tcp_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ nsq_http_port_container }}
+      hostPort: {{ nsq_http_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: {{ nsq_https_port_container }}
+      hostPort: {{ nsq_https_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    volumeMounts:
+    - mountPath: /data:rw,z
+      name: data
+  - name: nsqadmin
+    image: docker.io/nsqio/nsq:{{ nsq_version }}
+    command: ['/nsqadmin', '--lookupd-http-address=127.0.0.1:{{ nsqlookup_http_port_container }}']
+    ports:
+    - containerPort: {{ nsqadmin_port_container }}
+      hostPort: {{ nsqadmin_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+  volumes:
+  - name: data
+    hostPath:
+      path: /opt/saferwall/nsq

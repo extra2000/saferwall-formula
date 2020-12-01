@@ -1,0 +1,33 @@
+{% set minio_version = salt['pillar.get']('saferwall:service:minio:version') -%}
+{% set minio_port_container = salt['pillar.get']('saferwall:service:minio:port:container') -%}
+{% set minio_port_host = salt['pillar.get']('saferwall:service:minio:port:host') -%}
+{% set minio_accesskey = salt['pillar.get']('saferwall:service:minio:accesskey') -%}
+{% set minio_secret_key = salt['pillar.get']('saferwall:service:minio:seckey') -%}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: minio-pod
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: minio
+    image: docker.io/minio/minio:{{ minio_version }}
+    command: ['minio', 'server', '/data']
+    ports:
+    - containerPort: {{ minio_port_container }}
+      hostPort: {{ minio_port_host }}
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: MINIO_ACCESS_KEY
+      value: {{ minio_accesskey }}
+    - name: MINIO_SECRET_KEY
+      value: {{ minio_secret_key }}
+    volumeMounts:
+    - mountPath: /data:rw,z
+      name: data
+  volumes:
+  - name: data
+    hostPath:
+      path: /opt/saferwall/minio
