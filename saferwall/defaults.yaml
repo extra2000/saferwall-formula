@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+saferwall:
+  service:
+    ui:
+      version: 0.0.3
+    backend:
+      version: 0.0.3
+      max_file_size: 100000000  # 100MB
+      max_avatar_file_size: 10000000  # 10MB
+    consumer:
+      version: 0.0.3
+    nsq:
+      version: v1.2.0
+    minio:
+      version: RELEASE.2020-10-18T21-54-12Z
+    couchbase:
+      version: community-6.5.1
+    multiav:
+      clamav:
+        version: 0.0.3
+        enabled: true
+      comodo:
+        version: 0.0.3
+        enabled: true
+      sophos:
+        version: 0.0.3
+        enabled: true
+        url: https://www.dropbox.com/s/d9cx2wddeiqff59/sav-linux-free
+      windefender:
+        version: 0.0.3
+        enabled: true

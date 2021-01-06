@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
-{% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import SAFERWALL with context %}
 
-{% if salt['pillar.get']('saferwall:service:multiav:comodo:enabled') %}
+{% set comodo = SAFERWALL.service.multiav.comodo %}
+
+{% if comodo.enabled %}
 
 multiav-comodo-present:
   cmd.run:
-    - name: sudo sh -c "ulimit -n 524288 && exec su {{ host_user }} -c 'podman build --ulimit nofile=1024:524288 -t saferwall/comodo:{{ saferwall_version }} -f build/docker/Dockerfile.comodo build/data'"
+    - name: podman build -t saferwall/comodo:{{ comodo.version }} -f build/docker/Dockerfile.comodo build/data
     - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
+    - runas: {{ SAFERWALL.hostuser.name }}
 
 multiav-comodo-go-present:
   cmd.run:
-    - name: sudo sh -c "ulimit -n 524288 && exec su {{ host_user }} -c 'podman build --ulimit nofile=1024:524288 -t saferwall/gocomodo:{{ saferwall_version }} -f build/docker/Dockerfile.gocomodo .'"
+    - name: podman build -t saferwall/gocomodo:{{ comodo.version }} -f build/docker/Dockerfile.gocomodo .
     - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
+    - runas: {{ SAFERWALL.hostuser.name }}
     - require:
       - cmd: multiav-comodo-present
 

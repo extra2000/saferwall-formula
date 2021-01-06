@@ -1,33 +1,16 @@
-{% set backend_port = salt['pillar.get']('saferwall:service:backend:port:host') -%}
-{% set backend_admin_user = salt['pillar.get']('saferwall:service:backend:admin:user') -%}
-{% set backend_admin_password = salt['pillar.get']('saferwall:service:backend:admin:password') -%}
-{% set nsqlookup_http_port = salt['pillar.get']('saferwall:service:nsq:nsqlookup:port:http:host') -%}
-{% set nsq_tcp_port = salt['pillar.get']('saferwall:service:nsq:port:tcp:host') -%}
-{% set minio_port = salt['pillar.get']('saferwall:service:minio:port:host') -%}
-{% set minio_accesskey = salt['pillar.get']('saferwall:service:minio:accesskey') -%}
-{% set minio_secret_key = salt['pillar.get']('saferwall:service:minio:seckey') -%}
-{% set multiav_clamav_enabled = salt['pillar.get']('saferwall:service:multiav:clamav:enabled')|string|lower -%}
-{% set multiav_clamav_port = salt['pillar.get']('saferwall:service:multiav:clamav:port:host') -%}
-{% set multiav_comodo_enabled = salt['pillar.get']('saferwall:service:multiav:comodo:enabled')|string|lower -%}
-{% set multiav_comodo_port = salt['pillar.get']('saferwall:service:multiav:comodo:port:host') -%}
-{% set multiav_sophos_enabled = salt['pillar.get']('saferwall:service:multiav:sophos:enabled')|string|lower -%}
-{% set multiav_sophos_port = salt['pillar.get']('saferwall:service:multiav:sophos:port:host') -%}
-{% set multiav_windefender_enabled = salt['pillar.get']('saferwall:service:multiav:windefender:enabled')|string|lower -%}
-{% set multiav_windefender_port = salt['pillar.get']('saferwall:service:multiav:windefender:port:host') -%}
-
 [backend]
-address = 'http://127.0.0.1:{{ backend_port }}'
-admin_user = "{{ backend_admin_user }}"
-admin_pwd = "{{ backend_admin_password }}"
+address = 'http://127.0.0.1:{{ backend.port.host }}'
+admin_user = "{{ backend.admin.user }}"
+admin_pwd = "{{ backend.admin.password }}"
 
 [nsq]
-lookupd = ["10.77.1.1:{{ nsqlookup_http_port }}"]
-address = '10.77.1.1:{{ nsq_tcp_port }}'
+lookupd = ["10.77.1.1:{{ nsq.nsqlookup.port.http.host }}"]
+address = '10.77.1.1:{{ nsq.port.tcp.host }}'
 
 [minio]
-endpoint = '10.77.1.1:{{ minio_port }}'
-accesskey = '{{ minio_accesskey }}'
-seckey = '{{ minio_secret_key }}'
+endpoint = '10.77.1.1:{{ minio.port.host }}'
+accesskey = '{{ minio.accesskey }}'
+seckey = '{{ minio.seckey }}'
 spacename = 'samples'
 ssl = false
 
@@ -45,12 +28,12 @@ ssl = false
   addr = "10.77.1.1:10003"
 
   [multiav.clamav]
-  enabled = {{ multiav_clamav_enabled }}
-  addr = "10.77.1.1:{{ multiav_clamav_port }}"
+  enabled = {{ multiav.clamav.enabled | string | lower }}
+  addr = "10.77.1.1:{{ multiav.clamav.port.host }}"
 
   [multiav.comodo]
-  enabled = {{ multiav_comodo_enabled }}
-  addr = "10.77.1.1:{{ multiav_comodo_port }}"
+  enabled = {{ multiav.comodo.enabled | string | lower }}
+  addr = "10.77.1.1:{{ multiav.comodo.port.host }}"
 
   [multiav.drweb]
   enabled = false
@@ -73,8 +56,8 @@ ssl = false
   addr = "10.77.1.1:10010"
 
   [multiav.sophos]
-  enabled = {{ multiav_sophos_enabled }}
-  addr = "10.77.1.1:{{ multiav_sophos_port }}"
+  enabled = {{ multiav.sophos.enabled | string | lower }}
+  addr = "10.77.1.1:{{ multiav.sophos.port.host }}"
 
   [multiav.mcafee]
   enabled = false
@@ -85,5 +68,5 @@ ssl = false
   addr = "10.77.1.1:10013"
 
   [multiav.windefender]
-  enabled = {{ multiav_windefender_enabled }}
-  addr = "10.77.1.1:{{ multiav_windefender_port }}"
+  enabled = {{ multiav.windefender.enabled | string | lower }}
+  addr = "10.77.1.1:{{ multiav.windefender.port.host }}"

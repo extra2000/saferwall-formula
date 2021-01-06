@@ -1,8 +1,3 @@
-{% set ui_port_container = salt['pillar.get']('saferwall:service:ui:port:container') -%}
-{% set ui_port_host = salt['pillar.get']('saferwall:service:ui:port:host') -%}
-{% set backend_port_container = salt['pillar.get']('saferwall:service:backend:port:container') -%}
-{% set backend_port_host = salt['pillar.get']('saferwall:service:backend:port:host') -%}
-
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,36 +6,37 @@ spec:
   restartPolicy: OnFailure
   containers:
   - name: backend
-    image: localhost/saferwall/backend
+    image: localhost/saferwall/backend:{{ backend.version }}
     workingDir: /backend
     ports:
-    - containerPort: {{ backend_port_container }}
-      hostPort: {{ backend_port_host }}
+    - containerPort: {{ backend.port.container }}
+      hostPort: {{ backend.port.host }}
       hostIP: 0.0.0.0
       protocol: tcp
     env:
     - name: ENVIRONMENT
       value: "prod"
     volumeMounts:
-    - mountPath: /backend/config/app.prod.toml:ro,z
+    - mountPath: /backend/config/app.prod.toml
       name: backend-conf
   - name: ui
-    image: localhost/saferwall/ui
+    image: localhost/saferwall/ui:{{ ui.version }}
+    command: ['/entrypoint.sh']
     ports:
-    - containerPort: {{ ui_port_container }}
-      hostPort: {{ ui_port_host }}
+    - containerPort: {{ ui.port.container }}
+      hostPort: {{ ui.port.host }}
       hostIP: 0.0.0.0
       protocol: tcp
   - name: consumer
-    image: localhost/saferwall/consumer
+    image: localhost/saferwall/consumer:{{ consumer.version }}
     workingDir: /consumer
     env:
     - name: ENVIRONMENT
       value: "prod"
     volumeMounts:
-    - mountPath: /consumer/configs/saferwall.prod.toml:ro,z
+    - mountPath: /consumer/configs/saferwall.prod.toml
       name: consumer-conf
-    - mountPath: /samples:rw,z
+    - mountPath: /samples
       name: samples
   volumes:
   - name: backend-conf
@@ -50,5 +46,5 @@ spec:
     hostPath:
       path: /opt/saferwall/consumer-conf.toml
   - name: samples
-    hostPath:
-      path: /opt/saferwall/samples
+    persistentVolumeClaim:
+      claimName: samples-data

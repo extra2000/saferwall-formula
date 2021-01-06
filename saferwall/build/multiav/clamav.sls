@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% set host_user = salt['pillar.get']('saferwall:hostuser:name') -%}
-{% set saferwall_version = salt['pillar.get']('saferwall:version') -%}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import SAFERWALL with context %}
 
-{% if salt['pillar.get']('saferwall:service:multiav:clamav:enabled') %}
+{% set clamav = SAFERWALL.service.multiav.clamav %}
+
+{% if clamav.enabled %}
 
 multiav-clamav-present:
   cmd.run:
-    - name: sudo sh -c "ulimit -n 524288 && exec su {{ host_user }} -c 'podman build --ulimit nofile=1024:524288 -t saferwall/clamav:{{ saferwall_version }} -f build/docker/Dockerfile.clamav build/data'"
+    - name: podman build -t saferwall/clamav:{{ clamav.version }} -f build/docker/Dockerfile.clamav build/data
     - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
+    - runas: {{ SAFERWALL.hostuser.name }}
 
 multiav-clamav-go-present:
   cmd.run:
-    - name: sudo sh -c "ulimit -n 524288 && exec su {{ host_user }} -c 'podman build --ulimit nofile=1024:524288 -t saferwall/goclamav:{{ saferwall_version }} -f build/docker/Dockerfile.goclamav .'"
+    - name: podman build -t saferwall/goclamav:{{ clamav.version }} -f build/docker/Dockerfile.goclamav .
     - cwd: /opt/saferwall/src
-    - runas: {{ host_user }}
+    - runas: {{ SAFERWALL.hostuser.name }}
     - require:
       - cmd: multiav-clamav-present
 
