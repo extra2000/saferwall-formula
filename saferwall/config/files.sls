@@ -9,6 +9,21 @@
     - user: {{ SAFERWALL.hostuser.name }}
     - group: {{ SAFERWALL.hostuser.group }}
 
+/home/{{ SAFERWALL.hostuser.name }}/.config/cni/net.d:
+  file.directory:
+    - user: {{ SAFERWALL.hostuser.name }}
+    - group: {{ SAFERWALL.hostuser.group }}
+    - makedirs: true
+
+/home/{{ SAFERWALL.hostuser.name }}/.config/cni/net.d/podman-network-saferwall.conflist:
+  file.managed:
+    - source: salt://saferwall/files/podman-network-saferwall.conflist.jinja
+    - user: {{ SAFERWALL.hostuser.name }}
+    - group: {{ SAFERWALL.hostuser.group }}
+    - template: jinja
+    - context:
+      pod: {{ SAFERWALL.pod }}
+
 /opt/saferwall/src:
   file.recurse:
     - source: salt://saferwall/files/saferwall

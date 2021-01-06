@@ -12,15 +12,15 @@ admin_pwd = "{{ backend.admin.password }}"
 admin_email = "{{ backend.admin.email }}"
 
 [db]
-server = "couchbase://10.77.1.1"
+server = "couchbase://couchbase-pod.saferwall"
 username = "{{ couchbase.username }}"
 password = "{{ couchbase.password }}"
 
 [nsq]
-address = '10.77.1.1:{{ nsq.port.tcp.host }}'
+address = 'nsq-pod.saferwall:{{ nsq.port.tcp.host }}'
 
 [minio]
-endpoint = '10.77.1.1:{{ minio.port.host }}'
+endpoint = 'minio-pod.saferwall:{{ minio.port.host }}'
 accesskey = '{{ minio.accesskey }}'
 seckey = '{{ minio.seckey }}'
 spacename = 'samples'

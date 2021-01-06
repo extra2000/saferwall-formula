@@ -19,7 +19,7 @@ spec:
       protocol: tcp
   - name: nsq
     image: docker.io/nsqio/nsq:{{ nsq.version }}
-    command: ['/nsqd', '--data-path=/data', '--broadcast-address=10.77.1.1', '--lookupd-tcp-address=10.77.1.1:{{ nsq.nsqlookup.port.tcp.container }}']
+    command: ['/nsqd', '--data-path=/data', '--broadcast-address=nsq-pod.saferwall', '--lookupd-tcp-address=127.0.0.1:{{ nsq.nsqlookup.port.tcp.container }}']
     ports:
     - containerPort: {{ nsq.port.tcp.container }}
       hostPort: {{ nsq.port.tcp.host }}

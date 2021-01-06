@@ -4,11 +4,11 @@ admin_user = "{{ backend.admin.user }}"
 admin_pwd = "{{ backend.admin.password }}"
 
 [nsq]
-lookupd = ["10.77.1.1:{{ nsq.nsqlookup.port.http.host }}"]
-address = '10.77.1.1:{{ nsq.port.tcp.host }}'
+lookupd = ["nsq-pod.saferwall:{{ nsq.nsqlookup.port.http.host }}"]
+address = 'nsq-pod.saferwall:{{ nsq.port.tcp.host }}'
 
 [minio]
-endpoint = '10.77.1.1:{{ minio.port.host }}'
+endpoint = 'minio-pod.saferwall:{{ minio.port.host }}'
 accesskey = '{{ minio.accesskey }}'
 seckey = '{{ minio.seckey }}'
 spacename = 'samples'
@@ -17,56 +17,56 @@ ssl = false
 [multiav]
   [multiav.avast]
   enabled = false
-  addr = "10.77.1.1:10001"
+  addr = "multiav-pod.saferwall:10001"
 
   [multiav.avira]
   enabled = false
-  addr = "10.77.1.1:10002"
+  addr = "multiav-pod.saferwall:10002"
 
   [multiav.bitdefender]
   enabled = false
-  addr = "10.77.1.1:10003"
+  addr = "multiav-pod.saferwall:10003"
 
   [multiav.clamav]
   enabled = {{ multiav.clamav.enabled | string | lower }}
-  addr = "10.77.1.1:{{ multiav.clamav.port.host }}"
+  addr = "multiav-pod.saferwall:{{ multiav.clamav.port.host }}"
 
   [multiav.comodo]
   enabled = {{ multiav.comodo.enabled | string | lower }}
-  addr = "10.77.1.1:{{ multiav.comodo.port.host }}"
+  addr = "multiav-pod.saferwall:{{ multiav.comodo.port.host }}"
 
   [multiav.drweb]
   enabled = false
-  addr = "10.77.1.1:10006"
+  addr = "multiav-pod.saferwall:10006"
 
   [multiav.eset]
   enabled = false
-  addr = "10.77.1.1:10007"
+  addr = "multiav-pod.saferwall:10007"
 
   [multiav.fsecure]
   enabled = false
-  addr = "10.77.1.1:10008"
+  addr = "multiav-pod.saferwall:10008"
 
   [multiav.kaspersky]
   enabled = false
-  addr = "10.77.1.1:10009"
+  addr = "multiav-pod.saferwall:10009"
 
   [multiav.symantec]
   enabled = false
-  addr = "10.77.1.1:10010"
+  addr = "multiav-pod.saferwall:10010"
 
   [multiav.sophos]
   enabled = {{ multiav.sophos.enabled | string | lower }}
-  addr = "10.77.1.1:{{ multiav.sophos.port.host }}"
+  addr = "multiav-pod.saferwall:{{ multiav.sophos.port.host }}"
 
   [multiav.mcafee]
   enabled = false
-  addr = "10.77.1.1:10012"
+  addr = "multiav-pod.saferwall:10012"
 
   [multiav.trendmicro]
   enabled = false
-  addr = "10.77.1.1:10013"
+  addr = "multiav-pod.saferwall:10013"
 
   [multiav.windefender]
   enabled = {{ multiav.windefender.enabled | string | lower }}
-  addr = "10.77.1.1:{{ multiav.windefender.port.host }}"
+  addr = "multiav-pod.saferwall:{{ multiav.windefender.port.host }}"
