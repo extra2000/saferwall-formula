@@ -8,6 +8,11 @@ spec:
   - name: backend
     image: localhost/saferwall/backend:{{ backend.version }}
     workingDir: /backend
+    resources:
+      requests:
+        memory: {{ backend.resources.requests.memory }}
+      limits:
+        memory: {{ backend.resources.limits.memory }}
     ports:
     - containerPort: {{ backend.port.container }}
       hostPort: {{ backend.port.host }}
@@ -22,6 +27,11 @@ spec:
   - name: ui
     image: localhost/saferwall/ui:{{ ui.version }}
     command: ['/entrypoint.sh']
+    resources:
+      requests:
+        memory: {{ ui.resources.requests.memory }}
+      limits:
+        memory: {{ ui.resources.limits.memory }}
     ports:
     - containerPort: {{ ui.port.container }}
       hostPort: {{ ui.port.host }}
@@ -30,6 +40,11 @@ spec:
   - name: consumer
     image: localhost/saferwall/consumer:{{ consumer.version }}
     workingDir: /consumer
+    resources:
+      requests:
+        memory: {{ consumer.resources.requests.memory }}
+      limits:
+        memory: {{ consumer.resources.limits.memory }}
     env:
     - name: ENVIRONMENT
       value: "prod"

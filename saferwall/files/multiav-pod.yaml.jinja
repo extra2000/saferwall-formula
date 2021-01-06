@@ -10,6 +10,11 @@ spec:
   {% if multiav.clamav.enabled -%}
   - name: clamav
     image: localhost/saferwall/goclamav:{{ multiav.clamav.version }}
+    resources:
+      requests:
+        memory: {{ multiav.clamav.resources.requests.memory }}
+      limits:
+        memory: {{ multiav.clamav.resources.limits.memory }}
     ports:
     - containerPort: {{ multiav.clamav.port.container }}
       hostPort: {{ multiav.clamav.port.container }}
@@ -27,6 +32,11 @@ spec:
   {% if multiav.comodo.enabled -%}
   - name: comodo
     image: localhost/saferwall/gocomodo:{{ multiav.comodo.version }}
+    resources:
+      requests:
+        memory: {{ multiav.comodo.resources.requests.memory }}
+      limits:
+        memory: {{ multiav.comodo.resources.limits.memory }}
     ports:
     - containerPort: {{ multiav.comodo.port.container }}
       hostPort: {{ multiav.comodo.port.container }}
@@ -42,6 +52,11 @@ spec:
   {% if multiav.sophos.enabled -%}
   - name: sophos
     image: localhost/saferwall/gosophos:{{ multiav.sophos.version }}
+    resources:
+      requests:
+        memory: {{ multiav.sophos.resources.requests.memory }}
+      limits:
+        memory: {{ multiav.sophos.resources.limits.memory }}
     ports:
     - containerPort: {{ multiav.sophos.port.container }}
       hostPort: {{ multiav.sophos.port.container }}
@@ -57,6 +72,11 @@ spec:
   {% if multiav.windefender.enabled -%}
   - name: windefender
     image: localhost/saferwall/gowindefender:{{ multiav.windefender.version }}
+    resources:
+      requests:
+        memory: {{ multiav.windefender.resources.requests.memory }}
+      limits:
+        memory: {{ multiav.windefender.resources.limits.memory }}
     ports:
     - containerPort: {{ multiav.windefender.port.container }}
       hostPort: {{ multiav.windefender.port.container }}

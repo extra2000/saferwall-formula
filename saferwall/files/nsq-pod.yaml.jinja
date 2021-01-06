@@ -8,6 +8,11 @@ spec:
   - name: nsqlookup
     image: docker.io/nsqio/nsq:{{ nsq.version }}
     command: ['/nsqlookupd']
+    resources:
+      requests:
+        memory: {{ nsq.nsqlookup.resources.requests.memory }}
+      limits:
+        memory: {{ nsq.nsqlookup.resources.limits.memory }}
     ports:
     - containerPort: {{ nsq.nsqlookup.port.tcp.container }}
       hostPort: {{ nsq.nsqlookup.port.tcp.host }}
@@ -20,6 +25,11 @@ spec:
   - name: nsq
     image: docker.io/nsqio/nsq:{{ nsq.version }}
     command: ['/nsqd', '--data-path=/data', '--broadcast-address=nsq-pod.saferwall', '--lookupd-tcp-address=127.0.0.1:{{ nsq.nsqlookup.port.tcp.container }}']
+    resources:
+      requests:
+        memory: {{ nsq.resources.requests.memory }}
+      limits:
+        memory: {{ nsq.resources.limits.memory }}
     ports:
     - containerPort: {{ nsq.port.tcp.container }}
       hostPort: {{ nsq.port.tcp.host }}
@@ -39,6 +49,11 @@ spec:
   - name: nsqadmin
     image: docker.io/nsqio/nsq:{{ nsq.version }}
     command: ['/nsqadmin', '--lookupd-http-address=127.0.0.1:{{ nsq.nsqlookup.port.http.container }}']
+    resources:
+      requests:
+        memory: {{ nsq.nsqadmin.resources.requests.memory }}
+      limits:
+        memory: {{ nsq.nsqadmin.resources.limits.memory }}
     ports:
     - containerPort: {{ nsq.nsqadmin.port.container }}
       hostPort: {{ nsq.nsqadmin.port.host }}

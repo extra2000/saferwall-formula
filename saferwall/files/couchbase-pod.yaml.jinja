@@ -8,6 +8,11 @@ spec:
   - name: couchbase
     image: docker.io/couchbase/server:{{ couchbase.version }}
     command: ['couchbase-server']
+    resources:
+      requests:
+        memory: {{ couchbase.resources.requests.memory }}
+      limits:
+        memory: {{ couchbase.resources.limits.memory }}
     ports:
     - containerPort: {{ couchbase.port.rest_port.container }}
       hostPort: {{ couchbase.port.rest_port.host }}

@@ -8,6 +8,11 @@ spec:
   - name: minio
     image: docker.io/minio/minio:{{ minio.version }}
     command: ['minio', 'server', '/data']
+    resources:
+      requests:
+        memory: {{ minio.resources.requests.memory }}
+      limits:
+        memory: {{ minio.resources.limits.memory }}
     ports:
     - containerPort: {{ minio.port.container }}
       hostPort: {{ minio.port.host }}
