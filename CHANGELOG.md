@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.0.0](https://github.com/extra2000/saferwall-formula/compare/v1.0.0...v2.0.0) (2021-01-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Salt pillar format have changed and Podman volume is now using `persistentVolumeClaim`.
+
+### Features
+
+* **podman:** Add resource limitations to ensure host stability ([060144d](https://github.com/extra2000/saferwall-formula/commit/060144d9665020098c07d23adc1240a7b4d292f6))
+* **saferwall:** Rebase to latest commits ([a41f986](https://github.com/extra2000/saferwall-formula/commit/a41f986b436dfcc0fa37baef730b99a7ba6a3e2b))
+* Add mapping to SaltStack, change storage volume from host directory mount to `persistentVolumeClaim`, and fixes prior to Podman version `2.2.1` changes ([4c7952d](https://github.com/extra2000/saferwall-formula/commit/4c7952dc5c9b214d55c7047e6f5513460406bde6))
+* Add rootless Podman networking file for Saferwall ([820f667](https://github.com/extra2000/saferwall-formula/commit/820f6679baf37e1e0cec4312c88ad2ae129d163b))
+
+
+### Fixes
+
+* **defaults:** Reduce max file size scan from 100MB to 32MB due to high memory consumption from consumer and clamav ([40db87e](https://github.com/extra2000/saferwall-formula/commit/40db87e98536f6810858172ae2b5002f06ae46aa))
+
+
+### Documentations
+
+* **pillar:** Update `pillar.example` ([5a5674e](https://github.com/extra2000/saferwall-formula/commit/5a5674eaf55393417e71286c90b1f5cb195c0d96))
+* **README:** Remove `saferwall.config.volumes` state ([a35bcca](https://github.com/extra2000/saferwall-formula/commit/a35bcca5ba0bdb5ba9650027b3b440f56f43793b))
+
 ## 1.0.0 (2020-12-01)
 
 
