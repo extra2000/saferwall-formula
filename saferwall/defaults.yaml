@@ -28,9 +28,9 @@ saferwall:
       version: 0.0.3
       resources:
         requests:
-          memory: 2000Mi
+          memory: 3000Mi
         limits:
-          memory: 2100Mi
+          memory: 3100Mi
     nsq:
       version: v1.2.0
       resources:
