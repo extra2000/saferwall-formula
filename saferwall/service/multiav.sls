@@ -6,6 +6,6 @@
 
 multiav-running:
   cmd.run:
-    - name: podman play kube --seccomp-profile-root /opt/saferwall/src/build/data multiav-pod.yaml
+    - name: podman play kube --network=saferwall --seccomp-profile-root /opt/saferwall/src/build/data multiav-pod.yaml
     - cwd: /opt/saferwall
     - runas: {{ SAFERWALL.hostuser.name }}

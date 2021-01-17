@@ -6,6 +6,6 @@
 
 saferwall-running:
   cmd.run:
-    - name: podman play kube saferwall-pod.yaml
+    - name: podman play kube --network=saferwall saferwall-pod.yaml
     - cwd: /opt/saferwall
     - runas: {{ SAFERWALL.hostuser.name }}

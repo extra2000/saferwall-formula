@@ -6,6 +6,6 @@
 
 nsq-running:
   cmd.run:
-    - name: podman play kube nsq-pod.yaml
+    - name: podman play kube --network=saferwall nsq-pod.yaml
     - cwd: /opt/saferwall
     - runas: {{ SAFERWALL.hostuser.name }}

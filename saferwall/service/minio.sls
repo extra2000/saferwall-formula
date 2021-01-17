@@ -6,6 +6,6 @@
 
 minio-running:
   cmd.run:
-    - name: podman play kube minio-pod.yaml
+    - name: podman play kube --network=saferwall minio-pod.yaml
     - cwd: /opt/saferwall
     - runas: {{ SAFERWALL.hostuser.name }}

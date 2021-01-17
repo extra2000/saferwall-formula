@@ -6,6 +6,6 @@
 
 couchbase-running:
   cmd.run:
-    - name: podman play kube couchbase-pod.yaml
+    - name: podman play kube --network=saferwall couchbase-pod.yaml
     - cwd: /opt/saferwall
     - runas: {{ SAFERWALL.hostuser.name }}
