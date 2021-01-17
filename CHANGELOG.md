@@ -1,5 +1,20 @@
 # Changelog
 
+### [2.0.1](https://github.com/extra2000/saferwall-formula/compare/v2.0.0...v2.0.1) (2021-01-17)
+
+
+### Documentations
+
+* **pillar.example:** Add missing configurations for `consumer` ([1555162](https://github.com/extra2000/saferwall-formula/commit/1555162097631180f4d5995ca98822c6318c879e))
+* **pillar.example:** Update memory limits for `couchbase` ([d60f676](https://github.com/extra2000/saferwall-formula/commit/d60f676d2aa9eb6d4b45affb85e65a7485164f3f))
+
+
+### Fixes
+
+* **consumer:** Increase memory limit from 2.1GiB to 3.1GiB ([2a9b5ee](https://github.com/extra2000/saferwall-formula/commit/2a9b5eeb1f3b8a271ffdb259740e58bdee3e92c2))
+* **couchbase:** Increase memory limit from 1.1GiB to 2.6GiB ([acea8b3](https://github.com/extra2000/saferwall-formula/commit/acea8b3bf0ba6a861eeaf994788e1219835f7f0c))
+* **saferwall.service:** Fix missing `--network=saferwall` ([6912b08](https://github.com/extra2000/saferwall-formula/commit/6912b0803d9927807eb7b825c53402e33c3e866a))
+
 ## [2.0.0](https://github.com/extra2000/saferwall-formula/compare/v1.0.0...v2.0.0) (2021-01-09)
 
 
