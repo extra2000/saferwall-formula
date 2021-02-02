@@ -9,14 +9,14 @@ saferwall:
       domain_name: saferwall
   service:
     ui:
-      version: 0.0.3
+      version: 0.1.0
       resources:
         requests:
           memory: 10Mi
         limits:
           memory: 20Mi
     backend:
-      version: 0.0.3
+      version: 0.1.0
       max_file_size: 32000000  # 32MB
       max_avatar_file_size: 10000000  # 10MB
       resources:
@@ -25,7 +25,7 @@ saferwall:
         limits:
           memory: 300Mi
     consumer:
-      version: 0.0.3
+      version: 0.1.0
       resources:
         requests:
           memory: 3000Mi
@@ -66,7 +66,7 @@ saferwall:
           memory: 2600Mi
     multiav:
       clamav:
-        version: 0.0.3
+        version: 0.1.0
         enabled: true
         resources:
           requests:
@@ -74,7 +74,7 @@ saferwall:
           limits:
             memory: 2200Mi
       comodo:
-        version: 0.0.3
+        version: 0.1.0
         enabled: true
         resources:
           requests:
@@ -82,7 +82,7 @@ saferwall:
           limits:
             memory: 350Mi
       sophos:
-        version: 0.0.3
+        version: 0.1.0
         enabled: true
         url: https://www.dropbox.com/s/d9cx2wddeiqff59/sav-linux-free
         resources:
@@ -91,7 +91,7 @@ saferwall:
           limits:
             memory: 350Mi
       windefender:
-        version: 0.0.3
+        version: 0.1.0
         enabled: true
         resources:
           requests:
