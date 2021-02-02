@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/extra2000/saferwall-formula/compare/v2.0.1...v2.1.0) (2021-02-02)
+
+
+### Features
+
+* **defaults.yaml:** Update version from `0.0.3` to `0.1.0` ([2b727ad](https://github.com/extra2000/saferwall-formula/commit/2b727ade16dd9c56ada61d3c502579626b52805f))
+* **saferwall:** Update Saferwall commit ([8e587de](https://github.com/extra2000/saferwall-formula/commit/8e587de6e93076e5a4b875a44704f21644b5d3f0))
+
 ### [2.0.1](https://github.com/extra2000/saferwall-formula/compare/v2.0.0...v2.0.1) (2021-01-17)
 
 
