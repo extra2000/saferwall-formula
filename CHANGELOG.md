@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/extra2000/saferwall-formula/compare/v2.1.0...v2.2.0) (2021-02-10)
+
+
+### Features
+
+* **defaults.yaml:** Increase default max file size from 32MB to 64MB and fine tune container resources for the 64MB file upload ([7241652](https://github.com/extra2000/saferwall-formula/commit/72416527a815b29f369375c29edf2bcc55e5d71e))
+* **saferwall:** Update commits ([375ccea](https://github.com/extra2000/saferwall-formula/commit/375cceaedd58737d7fbe3b10f00e8bf60a8137aa))
+
 ## [2.1.0](https://github.com/extra2000/saferwall-formula/compare/v2.0.1...v2.1.0) (2021-02-02)
 
 
