@@ -17,20 +17,20 @@ saferwall:
           memory: 20Mi
     backend:
       version: 0.1.0
-      max_file_size: 32000000  # 32MB
+      max_file_size: 64000000  # 64MB
       max_avatar_file_size: 10000000  # 10MB
       resources:
         requests:
-          memory: 200Mi
+          memory: 500Mi
         limits:
-          memory: 300Mi
+          memory: 500Mi
     consumer:
       version: 0.1.0
       resources:
         requests:
-          memory: 3000Mi
+          memory: 500Mi
         limits:
-          memory: 3100Mi
+          memory: 500Mi
     nsq:
       version: v1.2.0
       resources:
@@ -70,31 +70,31 @@ saferwall:
         enabled: true
         resources:
           requests:
-            memory: 2100Mi
+            memory: 2500Mi
           limits:
-            memory: 2200Mi
+            memory: 2500Mi
       comodo:
         version: 0.1.0
         enabled: true
         resources:
           requests:
-            memory: 300Mi
+            memory: 500Mi
           limits:
-            memory: 350Mi
+            memory: 500Mi
       sophos:
         version: 0.1.0
         enabled: true
         url: https://www.dropbox.com/s/d9cx2wddeiqff59/sav-linux-free
         resources:
           requests:
-            memory: 300Mi
+            memory: 500Mi
           limits:
-            memory: 350Mi
+            memory: 500Mi
       windefender:
         version: 0.1.0
         enabled: true
         resources:
           requests:
-            memory: 400Mi
+            memory: 500Mi
           limits:
-            memory: 450Mi
+            memory: 500Mi
