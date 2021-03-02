@@ -7,7 +7,6 @@ spec:
   containers:
   - name: couchbase
     image: docker.io/couchbase/server:{{ couchbase.version }}
-    command: ['couchbase-server']
     resources:
       requests:
         memory: {{ couchbase.resources.requests.memory }}

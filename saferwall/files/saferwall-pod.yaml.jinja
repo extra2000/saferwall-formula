@@ -26,7 +26,6 @@ spec:
       name: backend-conf
   - name: ui
     image: localhost/saferwall/ui:{{ ui.version }}
-    command: ['/entrypoint.sh']
     resources:
       requests:
         memory: {{ ui.resources.requests.memory }}
