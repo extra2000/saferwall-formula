@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://github.com/extra2000/saferwall-formula/compare/v2.2.0...v2.2.1) (2021-03-02)
+
+
+### Fixes
+
+* **pods:** Remove Podman 2.x workarounds which may not compatible with Podman 3.x ([919b650](https://github.com/extra2000/saferwall-formula/commit/919b6505f4050ee3bcd9e176c950cf2edfe62b78))
+
 ## [2.2.0](https://github.com/extra2000/saferwall-formula/compare/v2.1.0...v2.2.0) (2021-02-10)
 
 
