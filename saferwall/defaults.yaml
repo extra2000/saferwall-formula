@@ -7,6 +7,15 @@ saferwall:
       subnet: 10.77.1.0/24
       gateway: 10.77.1.1
       domain_name: saferwall
+  nginx:
+    proxy:
+      frontend:
+        host: 127.0.0.1
+        port: 8000
+      backend:
+        host: 127.0.0.1
+        port: 8080
+    client_max_body_size: 80M
   service:
     ui:
       version: 0.1.0
