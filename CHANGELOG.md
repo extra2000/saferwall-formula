@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.3.0](https://github.com/extra2000/saferwall-formula/compare/v2.2.1...v2.3.0) (2021-03-07)
+
+
+### Features
+
+* **https:** Add state `saferwall.config.nginx` to configure NGINX for Saferwall HTTPS ([c6d1fcd](https://github.com/extra2000/saferwall-formula/commit/c6d1fcd6900fe8a2fcfcf56886a13567934dbf1b))
+
+
+### Documentations
+
+* **README:** Add state `saferwall.config.nginx` ([2a697aa](https://github.com/extra2000/saferwall-formula/commit/2a697aa0708a8037154f18f3f7055aaa47d5a115))
+
+
+### Fixes
+
+* **network:** Make `bridge` customizable to prevent pod networking conflicts ([34a80e7](https://github.com/extra2000/saferwall-formula/commit/34a80e7a139696b43488afc08a9906ff90fd2094))
+
 ### [2.2.1](https://github.com/extra2000/saferwall-formula/compare/v2.2.0...v2.2.1) (2021-03-02)
 
 
