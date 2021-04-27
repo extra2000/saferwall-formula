@@ -10,13 +10,13 @@
 
 multiav-clamav-present:
   cmd.run:
-    - name: podman build -t saferwall/clamav:{{ clamav.version }} -f build/docker/Dockerfile.clamav build/data
+    - name: podman build --no-cache -t saferwall/clamav:{{ clamav.version }} -f build/docker/Dockerfile.clamav build/data
     - cwd: /opt/saferwall/src
     - runas: {{ SAFERWALL.hostuser.name }}
 
 multiav-clamav-go-present:
   cmd.run:
-    - name: podman build -t saferwall/goclamav:{{ clamav.version }} -f build/docker/Dockerfile.goclamav .
+    - name: podman build --no-cache -t saferwall/goclamav:{{ clamav.version }} -f build/docker/Dockerfile.goclamav .
     - cwd: /opt/saferwall/src
     - runas: {{ SAFERWALL.hostuser.name }}
     - require:

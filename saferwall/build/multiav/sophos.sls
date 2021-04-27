@@ -10,13 +10,13 @@
 
 multiav-sophos-present:
   cmd.run:
-    - name: podman build -t saferwall/sophos:{{ sophos.version }} --build-arg 'SOPHOS_URL={{ sophos.url }}' -f build/docker/Dockerfile.sophos build/data
+    - name: podman build --no-cache -t saferwall/sophos:{{ sophos.version }} --build-arg 'SOPHOS_URL={{ sophos.url }}' -f build/docker/Dockerfile.sophos build/data
     - cwd: /opt/saferwall/src
     - runas: {{ SAFERWALL.hostuser.name }}
 
 multiav-sophos-go-present:
   cmd.run:
-    - name: podman build -t saferwall/gosophos:{{ sophos.version }} -f build/docker/Dockerfile.gosophos .
+    - name: podman build --no-cache -t saferwall/gosophos:{{ sophos.version }} -f build/docker/Dockerfile.gosophos .
     - cwd: /opt/saferwall/src
     - runas: {{ SAFERWALL.hostuser.name }}
     - require:
