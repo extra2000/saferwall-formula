@@ -88,18 +88,18 @@ saferwall:
         enabled: true
         resources:
           requests:
-            memory: 500Mi
+            memory: 1000Mi
           limits:
-            memory: 500Mi
+            memory: 1000Mi
       sophos:
         version: 0.1.0
         enabled: true
         url: https://www.dropbox.com/s/d9cx2wddeiqff59/sav-linux-free
         resources:
           requests:
-            memory: 500Mi
+            memory: 1000Mi
           limits:
-            memory: 500Mi
+            memory: 1000Mi
       windefender:
         version: 0.1.0
         enabled: true
