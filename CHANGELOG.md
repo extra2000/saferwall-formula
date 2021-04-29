@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.0.0](https://github.com/extra2000/saferwall-formula/compare/v2.3.0...v3.0.0) (2021-04-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **nginx:** NGINX is now required to be deployed as container.
+
+### Features
+
+* **saferwall:** Update commit ([0395c34](https://github.com/extra2000/saferwall-formula/commit/0395c34766fff073f9e95f27dc8c221ca71324ee))
+
+
+### Performance Improvements
+
+* **pillar:** Fine tune resources ([6cf7bc5](https://github.com/extra2000/saferwall-formula/commit/6cf7bc54488e7b4e87ef43523228d7451a28ac71))
+
+
+### Code Refactoring
+
+* **build.multiav:** Add `--no-cache` to simplify AV update ([22d1f5b](https://github.com/extra2000/saferwall-formula/commit/22d1f5b755ad5d7f2069be63e684a7e93d368ccd))
+* **nginx:** Update instructions as required by NGINX container ([b68a0d8](https://github.com/extra2000/saferwall-formula/commit/b68a0d8c90f00626e020224731b424efb10b8087))
+
 ## [2.3.0](https://github.com/extra2000/saferwall-formula/compare/v2.2.1...v2.3.0) (2021-03-07)
 
 
